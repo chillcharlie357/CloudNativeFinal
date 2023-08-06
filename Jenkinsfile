@@ -11,10 +11,10 @@ pipeline {
                 git branch: "main", url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
             }
         }
-        stage('Maven Build') {
+        stage('Gradle Build') {
             agent {
                 docker {
-                    image 'maven:latest'
+                    image 'gradle:latest'
                     args '-v /root/.m2:/root/.m2'
                 }
             }
