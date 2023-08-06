@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo "1.Git Clone Code"
                 sh 'curl "http://p2.nju.edu.cn/portal_io/login?username=usm&password=pwd"'
-                git url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
+                git branch: "main", url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
             }
         }
         stage('Maven Build') {
@@ -52,7 +52,7 @@ node('slave') {
 
         stage('Clone YAML') {
             echo "5. Git Clone YAML To Slave"
-        git url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
+            git url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
         }
 
         stage('YAML') {
