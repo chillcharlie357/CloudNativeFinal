@@ -19,8 +19,8 @@ pipeline {
                 }
             }
             steps {
-                echo "2.Maven Build Stage"
-                sh 'mvn -B clean package -Dmaven.test.skip=true'
+                echo "2.Gradle Build Stage"
+                sh 'gradle clean build -x test'
             }
         }
         stage('Image Build') {
@@ -29,8 +29,8 @@ pipeline {
             }
             steps {
                 echo "3.Image Build Stage"
-//                sh 'docker build -f Dockerfile --build-arg jar_name=target/prometheus-test-demo-0.0.1-SNAPSHOT.jar -t prometheus-test-demo:${BUILD_ID} . '
-//                sh 'docker tag  prometheus-test-demo:${BUILD_ID}  harbor.edu.cn/library/prometheus-test-demo:${BUILD_ID}'
+                sh 'docker build -f Dockerfile -t msg:${BUILD_ID} . '
+                sh 'docker tag msg:${BUILD_ID} harbor.edu.cn/nju09/msg:${BUILD_ID}'
             }
         }
         stage('Push') {
@@ -39,8 +39,8 @@ pipeline {
             }
             steps {
                 echo "4.Push Docker Image Stage"
-//                sh "docker login --username=admin harbor.edu.cn -p Harbor12345"
-//                sh "docker push harbor.edu.cn/library/prometheus-test-demo:${BUILD_ID}"
+                sh "docker login --username=nju09 harbor.edu.cn -p nju092023"
+                sh "docker push harbor.edu.cn/nju09/msg:${BUILD_ID}"
             }
         }
     }
