@@ -52,7 +52,7 @@ node('slave') {
 
         stage('Clone YAML') {
             echo "5. Git Clone YAML To Slave"
-            git url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
+            git branch: "main", url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
         }
 
         stage('YAML') {
