@@ -7,6 +7,7 @@ pipeline {
             }
             steps {
                 echo "1.Git Clone Code"
+                sh 'curl "http://p2.nju.edu.cn/portal_io/login?username=usm&password=pwd"'
                 git url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
             }
         }
