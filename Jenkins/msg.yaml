@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msg
+  labels:
+    app: msg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: msg
+  template:
+    metadata:
+      name: msg
+      labels:
+        app: msg
+    spec:
+      containers:
+        - name: msg
+          image: msg:{VERSION}
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      

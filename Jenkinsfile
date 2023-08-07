@@ -16,7 +16,7 @@ pipeline {
                 label 'master'
             }
             steps {
-                echo "3.Image Build Stage"
+                echo "2.Image Build Stage"
                 sh 'docker build -f Dockerfile -t msg:${BUILD_ID} . '
                 sh 'docker tag msg:${BUILD_ID} harbor.edu.cn/nju09/msg:${BUILD_ID}'
             }
@@ -26,7 +26,7 @@ pipeline {
                 label 'master'
             }
             steps {
-                echo "4.Push Docker Image Stage"
+                echo "3.Push Docker Image Stage"
                 sh "docker login --username=nju09 harbor.edu.cn -p nju092023"
                 sh "docker push harbor.edu.cn/nju09/msg:${BUILD_ID}"
             }
@@ -39,18 +39,19 @@ node('slave') {
     container('jnlp-kubectl') {
 
         stage('Clone YAML') {
-            echo "5. Git Clone YAML To Slave"
+            echo "4. Git Clone YAML To Slave"
+            sh 'curl "http://p2.nju.edu.cn/portal_io/login?username=usm&password=pwd"'
             git branch: "main", url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
         }
 
         stage('YAML') {
-            echo "6. Change YAML File Stage"
-//        sh 'sed -i "s#{VERSION}#${BUILD_ID}#g" ./jenkins/scripts/prometheus-test-demo.yaml'
+            echo "5. Change YAML File Stage"
+            sh 'sed -i "s/{VERSION}/${BUILD_ID}/g" ./Jenkins/msg.yaml '
         }
 
         stage('Deploy') {
             echo "7. Deploy To K8s Stage"
-//        sh 'kubectl apply -f ./jenkins/scripts/prometheus-test-demo.yaml'
+            sh 'kubectl apply -f ./Jenkins/msg.yaml'
         }
     }
 }
