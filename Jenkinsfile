@@ -11,18 +11,6 @@ pipeline {
                 git branch: "main", url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
             }
         }
-        stage('Gradle Build') {
-            agent {
-                docker {
-                    image 'gradle:latest'
-                    args '-v /root/.m2:/root/.m2'
-                }
-            }
-            steps {
-                echo "2.Gradle Build Stage"
-                sh 'gradle clean build -x test'
-            }
-        }
         stage('Image Build') {
             agent {
                 label 'master'
