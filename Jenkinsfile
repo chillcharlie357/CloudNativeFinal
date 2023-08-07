@@ -11,6 +11,14 @@ pipeline {
                 git branch: "main", url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
             }
         }
+        stage('Test'){
+            agent {
+                label 'master'
+            }
+            stages {
+                sh 'gradle test'
+            }
+        }
         stage('Image Build') {
             agent {
                 label 'master'
@@ -32,6 +40,11 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            junit 'build/reports/**/*.html'
+        }
+    }
 }
 
 
@@ -46,12 +59,12 @@ node('slave') {
 
         stage('YAML') {
             echo "5. Change YAML File Stage"
-            sh 'sed -i "s/{VERSION}/${BUILD_ID}/g" ./Jenkins/msg.yaml '
+            sh 'sed -i "s/\${VERSION}/${BUILD_ID}/g" ./Jenkins/msg_deployment.yaml '
         }
 
         stage('Deploy') {
             echo "7. Deploy To K8s Stage"
-            sh 'kubectl apply -f ./Jenkins/msg.yaml'
+            sh 'kubectl apply -f ./Jenkins/msg_deployment.yaml'
         }
     }
 }
