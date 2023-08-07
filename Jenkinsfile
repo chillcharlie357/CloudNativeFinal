@@ -15,7 +15,7 @@ pipeline {
             agent {
                 label 'master'
             }
-            stages {
+            steps {
                 sh 'gradle test'
             }
         }
