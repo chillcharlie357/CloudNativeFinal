@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  labels:
+    app: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      name: prometheus
+      labels:
+        app: prometheus
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus:v2.38.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - mountPath: /etc/prometheus
+              name: prometheus-volume
+          args:
+            -  "--config.file=/etc/prometheus/prometheus.yml"
+      restartPolicy: Always
+      volumes:
+        - name: prometheus-volume
+          hostPath:
+            path: /home/charlie/Code/2023_Spring/CloudNative/cloudNative/metrics/prometheus
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+spec:
+  selector:
+    app: prometheus
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: NodePort

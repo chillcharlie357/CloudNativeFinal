@@ -32,11 +32,6 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            junit 'build/reports/**/*.html'
-        }
-    }
 }
 
 
@@ -51,12 +46,14 @@ node('slave') {
 
         stage('YAML') {
             echo "5. Change YAML File Stage"
-            sh 'sed -i "s/\${VERSION}/${BUILD_ID}/g" ./Jenkins/msg_deployment.yaml '
+            sh 'sed -i "s/\${VERSION}/${BUILD_ID}/g" ./k8s/msg.yaml'
         }
 
         stage('Deploy') {
             echo "7. Deploy To K8s Stage"
-            sh 'kubectl apply -f ./Jenkins/msg_deployment.yaml'
+            sh 'kubectl apply -f ./k8s/msg.yaml'
+            sh 'kubectl apply -f ./k8s/prometheus.yaml'
+            sh 'kubectl apply -f ./k8s/grafana.yaml'
         }
     }
 }
