@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: msg
-          image: msg:test
+          image: msg:${VERSION}
           imagePullPolicy: IfNotPresent
       restartPolicy: Always
 ---
