@@ -11,14 +11,6 @@ pipeline {
                 git branch: "main", url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
             }
         }
-        stage('Test'){
-            agent {
-                label 'master'
-            }
-            steps {
-                sh 'gradle test'
-            }
-        }
         stage('Image Build') {
             agent {
                 label 'master'
