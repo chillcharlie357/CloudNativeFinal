@@ -4,9 +4,14 @@ services:
     image: prom/prometheus:v2.38.0
     container_name: prometheus-container
     volumes:
-      - ./prometheus/:/etc/prometheus/
+      - ./metrics/prometheus/:/etc/prometheus/
     command:
-      - '--config.file=/etc/prometheus/prometheus.yaml'
+      - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
       - "9090:9090"
     restart: always
+    network_mode: host
+  web:
+    build: .
+    ports:
+      - "8080:8080"
