@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo "1.Git Clone Code"
                 sh 'curl "http://p2.nju.edu.cn/portal_io/login?username=usm&password=pwd"'
-                git branch: "main", url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
+                git branch: "main", url: "https://git.nju.edu.cn/he/cloudnative.git"
             }
         }
         stage('Image Build') {
@@ -41,7 +41,7 @@ node('slave') {
         stage('Clone YAML') {
             echo "4. Git Clone YAML To Slave"
             sh 'curl "http://p2.nju.edu.cn/portal_io/login?username=usm&password=pwd"'
-            git branch: "main", url: "https://github.com/chillcharlie357/CloudNativeFinal.git"
+            git branch: "main", url: "https://git.nju.edu.cn/he/cloudnative.git"
         }
 
         stage('YAML') {
@@ -52,8 +52,6 @@ node('slave') {
         stage('Deploy') {
             echo "7. Deploy To K8s Stage"
             sh 'kubectl apply -f ./k8s/msg.yaml --namespace=nju09'
-            sh 'kubectl apply -f ./k8s/prometheus.yaml --namespace=nju09'
-            sh 'kubectl apply -f ./k8s/grafana.yaml --namespace=nju09'
         }
     }
 }
