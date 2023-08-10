@@ -1,5 +1,8 @@
 pipeline {
     agent none
+    environment {
+        GIT_SSL_NO_VERIFY = 'true'
+    }
     stages {
         stage('Clone Code') {
             agent {
@@ -7,7 +10,6 @@ pipeline {
             }
             steps {
                 echo "1.Git Clone Code"
-                ignoreCertificateErrors()
                 sh 'curl "http://p2.nju.edu.cn/portal_io/login?username=usm&password=pwd"'
                 git branch: "main", url: "https://git.nju.edu.cn/he/cloudnative.git"
             }
