@@ -38,7 +38,7 @@ pipeline {
 }
 
 
-node('slave') {
+node('master') {
     container('jnlp-kubectl') {
 
         stage('Clone YAML') {
