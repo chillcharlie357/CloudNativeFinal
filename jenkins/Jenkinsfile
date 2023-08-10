@@ -43,6 +43,10 @@ node('slave') {
             sh 'curl "http://p2.nju.edu.cn/portal_io/login?username=usm&password=pwd"'
             git branch: "main", url: "https://git.nju.edu.cn/he/cloudnative.git"
         }
+        stage('Pull Image') {
+            sh "docker login --username=nju09 harbor.edu.cn -p nju092023"
+            sh "docker pull harbor.edu.cn/nju09/msg:${BUILD_ID}"
+        }
 
         stage('YAML') {
             echo "5. Change YAML File Stage"
