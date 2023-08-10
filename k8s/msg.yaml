@@ -17,11 +17,10 @@ spec:
     spec:
       containers:
         - name: msg
-          image: msg:VERSION
+          image: nju09/msg:VERSION
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
-      restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
