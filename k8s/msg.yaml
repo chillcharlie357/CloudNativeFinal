@@ -19,6 +19,8 @@ spec:
         - name: msg
           image: msg:VERSION
           imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
       restartPolicy: Always
 ---
 apiVersion: v1
