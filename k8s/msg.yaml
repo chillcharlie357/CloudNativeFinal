@@ -15,16 +15,11 @@ spec:
       name: msg
       labels:
         app: msg
-      annotations:
-        prometheus.io/path: /actuator/prometheus
-        prometheus.io/port: "8080"
-        prometheus.io/scheme: http
-        prometheus.io/scrape: "true"
     spec:
       containers:
         - name: msg
           image: harbor.edu.cn/nju09/msg:VERSION
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
       imagePullSecrets:
