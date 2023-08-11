@@ -4,12 +4,13 @@ metadata:
   labels:
     k8s-app: msg
   name: msg
-  namespace: nju09
+  namespace: monitoring
 spec:
   endpoints:
   - interval: 30s
     targetPort: 9090
     path: /actuator/prometheus
+    scheme: 'http'
   namespaceSelector:
     matchNames:
     - nju09
