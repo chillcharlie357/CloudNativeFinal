@@ -30,7 +30,7 @@ spec:
       volumes:
         - name: prometheus-volume
           hostPath:
-            path: ../metrics/prometheus
+            path: metrics/prometheus/prometheus.yml
 ---
 apiVersion: v1
 kind: Service
