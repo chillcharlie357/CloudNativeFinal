@@ -37,3 +37,7 @@ out/
 .vscode/
 /lib/
 /test.sh
+/k8s/clusterRole.yaml
+/k8s/grafana.yaml
+/k8s/msg-test.yaml
+/k8s/prometheus.yaml

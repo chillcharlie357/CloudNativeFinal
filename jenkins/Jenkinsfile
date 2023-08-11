@@ -1,8 +1,5 @@
 pipeline {
     agent none
-    environment {
-        GIT_SSL_NO_VERIFY = 'true'
-    }
     stages {
         stage('Clone Code') {
             agent {
@@ -43,7 +40,6 @@ node('slave') {
 
         stage('Clone YAML') {
             echo "4. Git Clone YAML To Slave"
-//            sh 'export GIT_SSL_NO_VERIFY=true'
             sh 'curl "http://p2.nju.edu.cn/portal_io/login?username=usm&password=pwd"'
             git branch: "main", url: "https://gitee.com/heleyang/cloud-native.git"
         }
