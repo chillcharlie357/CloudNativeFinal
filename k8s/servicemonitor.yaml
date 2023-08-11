@@ -2,17 +2,17 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    serviceMonitorSelector: prometheus
-  name: prometheus
+    k8s-app: msg
+  name: msg
   namespace: nju09
 spec:
   endpoints:
   - interval: 30s
     targetPort: 9090
-    path: /metrics
+    path: /actuator/prometheus
   namespaceSelector:
     matchNames:
-    - prometheus
+    - nju09
   selector:
     matchLabels:
-      operated-prometheus: "true"
+      app: msg

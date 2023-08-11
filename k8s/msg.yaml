@@ -15,6 +15,11 @@ spec:
       name: msg
       labels:
         app: msg
+      annotations:
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8080"
+        prometheus.io/scheme: http
+        prometheus.io/scrape: "true"
     spec:
       containers:
         - name: msg
@@ -29,11 +34,8 @@ kind: Service
 metadata:
   name: msg
   namespace: nju09
-  annotations:
-    prometheus.io/port: "metrics"
-    prometheus.io/scrape: "true"
   labels:
-    app.kubernetes.io/part-of: dms
+    app: msg
 spec:
   selector:
     app: msg
