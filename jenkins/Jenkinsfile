@@ -56,8 +56,8 @@ node('slave') {
         stage('Deploy') {
             echo "7. Deploy To K8s Stage"
             sh "docker login --username=nju09 harbor.edu.cn -p nju092023"
-            sh "kubectl apply -f ./k8s/serviceMonitor.yaml"
             sh 'kubectl apply -f ./k8s/msg.yaml'
+            sh "kubectl apply -f ./k8s/serviceMonitor.yaml"
         }
     }
 }
