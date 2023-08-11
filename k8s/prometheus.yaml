@@ -22,16 +22,18 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9090
+          command:
+            - "/bin/prometheus"
           volumeMounts:
             - mountPath: /etc/prometheus
-              name: prometheus-volume
+              name: prometheus-config
           args:
             -  "--config.file=/etc/prometheus/prometheus.yml"
       restartPolicy: Always
       volumes:
-        - name: prometheus-volume
-          hostPath:
-            path: metrics/prometheus/prometheus.yml
+        - name: prometheus-config
+          configMap:
+            name: prometheus-config
 ---
 apiVersion: v1
 kind: Service

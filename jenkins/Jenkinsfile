@@ -56,6 +56,7 @@ node('slave') {
 
         stage('Deploy') {
             echo "7. Deploy To K8s Stage"
+            sh "kubectl apply -f ./k8s/prometheus-config.yaml -n nju09"
             sh 'kubectl apply -f ./k8s/prometheus.yaml -n nju09'
             sh 'kubectl apply -f ./k8s/msg.yaml -n nju09'
         }
