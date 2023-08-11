@@ -28,7 +28,7 @@ spec:
           ports:
             - containerPort: 8080
       imagePullSecrets:
-        - name: nju09
+        - name: login
       restartPolicy: Always
 ---
 apiVersion: v1
