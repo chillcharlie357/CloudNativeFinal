@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo "1.Git Clone Code"
                 sh 'curl "http://p2.nju.edu.cn/portal_io/login?username=usm&password=pwd"'
-                git branch: "main", url: "https://git.nju.edu.cn/he/cloudnative.git"
+                git branch: "main", url: "https://gitee.com/heleyang/cloud-native.git"
             }
         }
         stage('Image Build') {
@@ -45,7 +45,7 @@ node('slave') {
             echo "4. Git Clone YAML To Slave"
 //            sh 'export GIT_SSL_NO_VERIFY=true'
             sh 'curl "http://p2.nju.edu.cn/portal_io/login?username=usm&password=pwd"'
-            git branch: "main", url: "https://git.nju.edu.cn/he/cloudnative.git"
+            git branch: "main", url: "https://gitee.com/heleyang/cloud-native.git"
         }
         stage('Pull Image') {
             sh "docker login --username=nju09 harbor.edu.cn -p nju092023"
