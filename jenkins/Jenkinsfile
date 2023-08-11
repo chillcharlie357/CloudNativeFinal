@@ -46,6 +46,7 @@ node('slave') {
         stage('Pull Image') {
             sh "docker login --username=nju09 harbor.edu.cn -p nju092023"
             sh "docker pull harbor.edu.cn/nju09/msg:${BUILD_ID}"
+            sh "docker pull prom/prometheus:v2.38.0"
         }
 
         stage('YAML') {
