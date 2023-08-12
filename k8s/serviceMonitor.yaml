@@ -10,6 +10,7 @@ spec:
   - interval: 30s
     path: /actuator/prometheus
     scheme: 'http'
+    port: tcp
   namespaceSelector:
     matchNames:
     - nju09
