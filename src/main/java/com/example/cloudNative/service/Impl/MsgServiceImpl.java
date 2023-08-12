@@ -6,12 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MsgServiceImpl implements MsgService {
-    public MsgEntity msgEntity() {
-        return new MsgEntity();
+    public MsgEntity msgEntity(String content,Long count) {
+        return new MsgEntity(content,count);
     }
-
-    public MsgEntity msgEntity(String content) {
-        return new MsgEntity(content);
-    }
-
 }

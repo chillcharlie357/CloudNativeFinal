@@ -24,23 +24,28 @@ public class MsgController {
 
     private Bucket bucket;
 
-    public MsgController(){
+    private Long requestCount;
+
+    public MsgController() {
         this.bucket = null;
     }
 
+
     @PostConstruct
-    public void init(){
-          Bandwidth limit = Bandwidth.classic(
+    public void init() {
+        Bandwidth limit = Bandwidth.classic(
                 100,
                 Refill.greedy(100, Duration.ofSeconds(1))
         );
         this.bucket = Bucket.builder().addLimit(limit).build();
+        requestCount = 0L;
     }
+
     //TODO: 测试限流
     @GetMapping("/msg/{content}")
     public ResponseEntity<MsgEntity> getMsg(@PathVariable(value = "content") String content) {
         if (bucket.tryConsume(1)) {
-            return ResponseEntity.ok(msgService.msgEntity(content));
+            return ResponseEntity.ok(msgService.msgEntity(content, ++requestCount));
         }
         return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build();
     }
