@@ -54,15 +54,19 @@ dependencies {
     implementation 'com.github.vladimir-bukhtoyarov:bucket4j-core:7.6.0'
     implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.1'
     implementation 'io.micrometer:micrometer-registry-prometheus:1.9.1'
+    // https://mvnrepository.com/artifact/io.prometheus/simpleclient_hotspot
+    implementation 'io.prometheus:simpleclient_hotspot:0.16.0'
+    // https://mvnrepository.com/artifact/io.prometheus/simpleclient_spring_boot
+    implementation 'io.prometheus:simpleclient_spring_boot:0.16.0'
+    // https://mvnrepository.com/artifact/io.prometheus/simpleclient_servlet
+    implementation 'io.prometheus:simpleclient_servlet:0.16.0'
     compileOnly 'org.projectlombok:lombok'
-    implementation 'io.micrometer:micrometer-registry-prometheus'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
 dependencyManagement {
