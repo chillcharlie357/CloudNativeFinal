@@ -4,7 +4,7 @@ services:
     image: prom/prometheus:v2.38.0
     container_name: prometheus-container
     volumes:
-      - ./metrics/prometheus/:/etc/prometheus/
+      - ./k8s/metrics/prometheus/:/etc/prometheus/
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
@@ -21,7 +21,7 @@ services:
     container_name: grafana
     restart: unless-stopped
     volumes:
-      - ./metrics/grafana:/var/lib/grafana
+      - ./k8s/metrics/grafana:/var/lib/grafana
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=Grafana
       - GF_SERVER_DOMAIN=localhost

@@ -41,7 +41,7 @@ public class MsgController {
         requestCount = 0L;
     }
 
-    //TODO: 测试限流
+
     @GetMapping("/msg/{content}")
     public ResponseEntity<MsgEntity> getMsg(@PathVariable(value = "content") String content) {
         if (bucket.tryConsume(1)) {
